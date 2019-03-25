@@ -1,16 +1,10 @@
 package com.example.alex.testapp;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 
 import org.json.JSONArray;
@@ -25,55 +19,42 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class CommentActivity extends AppCompatActivity {
+
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private static CustomAdapter adapter;
-    private static List<MyData> data_list;
-    private Button btn_retrieve, btn_activity2;
-    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+    private static CommentAdapter adapter;
+    private static List<CommentData> data_list;
+    private Button btn_retrieve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_comment);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         btn_retrieve=(Button) findViewById(R.id.btn_retrieve);
-        btn_activity2=(Button) findViewById(R.id.btn_activity2);
         data_list = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new CustomAdapter(this,data_list);
+        adapter = new CommentAdapter(this,data_list);
         recyclerView.setAdapter(adapter);
-
-
-        btn_retrieve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask myTask = new MyTask();
-                if (checkAndRequestPermissions()){
-                    myTask.execute();
-                }
-            }
-        });
-        btn_activity2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-//                startActivity(intent);
-//                finish();
-
-            }
-        });
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            MyTask myTask = new MyTask(Integer.parseInt(extras.getString("id")));
+            myTask.execute();
+        }
 
 
     }
 
     private static class MyTask extends AsyncTask<Void, Void, String> {
-
+        int id;
+        MyTask(int id){
+            this.id = id;
+        }
         @Override
         protected void onPostExecute(String result) {
             adapter.notifyDataSetChanged();
@@ -81,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         protected String doInBackground(Void... voids) {
-            String urlSearch ="http://jsonplaceholder.typicode.com/posts" ;
+            String urlSearch ="http://jsonplaceholder.typicode.com/posts/"+id+"/comments" ;
             OkHttpClient client = new OkHttpClient();
             Request request = new Request
                     .Builder()
@@ -94,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray array = new JSONArray(bodyString);
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
-                    MyData data = new MyData(object.getString("title"),object.getString("body"),object.getInt("id"));
+                    CommentData data = new CommentData(object.getString("name"),object.getString("email"),object.getString("body"),object.getInt("postId"));
+                    System.out.println(data);
                     data_list.add(data);
                 }
 
@@ -107,18 +89,5 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
-    }
-
-    private  boolean checkAndRequestPermissions() {
-        int permissionInternet = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET);
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        if (permissionInternet != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.INTERNET);
-        }
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
     }
 }

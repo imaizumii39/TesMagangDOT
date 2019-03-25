@@ -1,6 +1,8 @@
 package com.example.alex.testapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +34,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(my_data.get(position).getTitle());
         holder.body.setText(my_data.get(position).getBody());
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CommentActivity.class);
+                intent.putExtra("id", String.valueOf(my_data.get(position).getId()));
+                view.getContext().startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -44,8 +56,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView title, body;
+        public CardView card;
         public ViewHolder(View itemView){
             super(itemView);
+            card = (CardView) itemView.findViewById(R.id.card_post);
             title = (TextView) itemView.findViewById(R.id.txt_title);
             body = (TextView) itemView.findViewById(R.id.txt_body);
         }
