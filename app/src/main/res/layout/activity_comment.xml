@@ -18,15 +18,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:listItem="@layout/list_list"></android.support.v7.widget.RecyclerView>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Retrieve"
-            android:id="@+id/btn_retrieve"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Go to activity 2"
-            android:id="@+id/btn_activity2"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -18,15 +18,15 @@
             android:layout_weight="1"
             tools:listItem="@layout/list_list"></android.support.v7.widget.RecyclerView>
         <Button
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#e6e8f5"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Retrieve"
-            android:id="@+id/btn_retrieve"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Go to activity 2"
-            android:id="@+id/btn_activity2"/>
+            android:layout_height="40dp"
+            android:text="Retrieve Post"
+            android:id="@+id/btn_retrieve"
+            android:background="@drawable/round_button"/>
     </LinearLayout>
 
 

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private static CustomAdapter adapter;
     private static List<MyData> data_list;
-    private Button btn_retrieve, btn_activity2;
+    private Button btn_retrieve;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     @Override
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         btn_retrieve=(Button) findViewById(R.id.btn_retrieve);
-        btn_activity2=(Button) findViewById(R.id.btn_activity2);
         data_list = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(this);
@@ -57,15 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 if (checkAndRequestPermissions()){
                     myTask.execute();
                 }
-            }
-        });
-        btn_activity2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-//                startActivity(intent);
-//                finish();
-
             }
         });
 

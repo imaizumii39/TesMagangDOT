@@ -26,14 +26,12 @@ public class CommentActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private static CommentAdapter adapter;
     private static List<CommentData> data_list;
-    private Button btn_retrieve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
-        btn_retrieve=(Button) findViewById(R.id.btn_retrieve);
         data_list = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(this);
