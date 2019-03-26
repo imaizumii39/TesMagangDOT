@@ -1,7 +1,6 @@
 package com.example.alex.testapp;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
@@ -29,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private static CustomAdapter adapter;
-    private static List<MyData> data_list;
+    private static PostAdapter adapter;
+    private static List<PostData> data_list;
     private Button btn_retrieve;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new CustomAdapter(this,data_list);
+        adapter = new PostAdapter(this,data_list);
         recyclerView.setAdapter(adapter);
 
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray array = new JSONArray(bodyString);
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
-                    MyData data = new MyData(object.getString("title"),object.getString("body"),object.getInt("id"));
+                    PostData data = new PostData(object.getString("title"),object.getString("body"),object.getInt("id"));
                     data_list.add(data);
                 }
 

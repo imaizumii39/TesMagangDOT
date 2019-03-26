@@ -4,11 +4,11 @@ package com.example.alex.testapp;
  * Created by Alex on 3/25/2019.
  */
 
-class MyData {
+class PostData {
     private String title,body;
     int id;
 
-    public MyData(String title, String body, int id) {
+    public PostData(String title, String body, int id) {
         this.title = title;
         this.body = body;
         this.id=id;

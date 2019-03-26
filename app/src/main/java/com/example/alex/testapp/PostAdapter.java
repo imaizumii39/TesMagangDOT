@@ -15,12 +15,12 @@ import java.util.List;
  * Created by Alex on 3/25/2019.
  */
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Context context;
-    private List<MyData> my_data;
+    private List<PostData> my_data;
 
-    public CustomAdapter(Context context, List<MyData> my_data) {
+    public PostAdapter(Context context, List<PostData> my_data) {
         this.context = context;
         this.my_data = my_data;
 
