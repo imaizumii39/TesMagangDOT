@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="5dp"
+    android:layout_marginVertical="5dp"
     android:background="#ffffff"
     android:padding="5dp"
     android:id="@+id/card_comment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:src="@drawable/user"
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Unavailable"
                 android:id="@+id/txt_name"
-                android:textSize="25sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
                 />
@@ -35,9 +45,11 @@
                 android:layout_height="wrap_content"
                 android:text="Unavailable"
                 android:id="@+id/txt_body"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="#212121"
                 />
         </LinearLayout>
+    </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

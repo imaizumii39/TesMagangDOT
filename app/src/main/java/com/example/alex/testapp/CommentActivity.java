@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,12 +27,15 @@ public class CommentActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private static CommentAdapter adapter;
     private static List<CommentData> data_list;
+    private TextView txt_title, txt_body;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
+        txt_title=(TextView) findViewById(R.id.txt_title);
+        txt_body=(TextView) findViewById(R.id.txt_body);
         data_list = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(this);
@@ -41,6 +45,8 @@ public class CommentActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
+            txt_title.setText(extras.getString("title"));
+            txt_body.setText(extras.getString("body"));
             MyTask myTask = new MyTask(Integer.parseInt(extras.getString("id")));
             myTask.execute();
         }

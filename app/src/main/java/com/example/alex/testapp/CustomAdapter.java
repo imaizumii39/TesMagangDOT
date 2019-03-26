@@ -43,6 +43,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CommentActivity.class);
                 intent.putExtra("id", String.valueOf(my_data.get(position).getId()));
+                intent.putExtra("title",String.valueOf(my_data.get(position).getTitle()));
+                intent.putExtra("body",String.valueOf(my_data.get(position).getBody()));
                 view.getContext().startActivity(intent);
 
             }
